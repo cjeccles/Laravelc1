@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/about_us', [TestController::class, 'showAboutPage'])->name('about');
+Route::get('/about/{user}', [TestController::class, 'showAboutDetails']);
+Route::post('/register', [UserController::class, 'register']);
+
+Route::resource('user', AuthController::class);
