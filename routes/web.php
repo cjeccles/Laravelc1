@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [RegisterController::class, 'show']);
+Route::post('/register', [UserController::class, 'register']);
+
+
+//Route::get('/login', [RegisterController::class, 'showLoginPage']);
+Route::inertia('/login', 'Login');
+Route::post('/login', [UserController::class, 'login']);
+
+Route::inertia('/dashboard', 'Dashboard');
+
+Route::get('/blog', function () {
+    return view('blog');
 });
 
 
 Route::get('/about_us', [TestController::class, 'showAboutPage'])->name('about');
 Route::get('/about/{user}', [TestController::class, 'showAboutDetails']);
-Route::post('/register', [UserController::class, 'register']);
+
+
+Route::post('/create-blog', [UserController::class, 'createBlogArticle']);
 
 Route::resource('user', AuthController::class);

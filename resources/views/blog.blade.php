@@ -6,12 +6,12 @@
         <title>Document</title>
 </head>
 <body>
-    <form action="/register" method="POST">
+    <form action="/create-blog" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Name" />
-        <input type="email" name="email" placeholder="Email Address" />
-        <input type="password" name="password" id="password" placeholder="Password" />
-        <button>Sign Up</button>
+        <input type="text" name="title" placeholder="Blog Title" />
+        <textarea name="article" placeholder="Add your article text here" rows="5" cols="20"></textarea>
+        <input type="email" name="email" />
+        <button>Create Article</button>
 
         <ul>
             @foreach ($errors->all() as $error)

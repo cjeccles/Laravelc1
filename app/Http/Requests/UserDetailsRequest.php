@@ -22,7 +22,8 @@ class UserDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => ['required', 'email:rfc,dns'],
+            "name" => ['required'],
+            "email" => ['required', 'email:rfc,dns', 'unique:users,email'],
             "password" => ['required', 'min:6', 'max:12', '']
         ];
     }
@@ -32,6 +33,7 @@ class UserDetailsRequest extends FormRequest
         return [
             "email.required" => "Please enter your email",
             "email.email" => "Please enter a real email address",
+            "email.unique" => "User already registered with this email address",
             "password.required" => "Please enter a pa55word",
             "password.min" => "You must enter at least 6 characters for your password, please :)",
             "password.max" => "Oops, your password is too long!"
